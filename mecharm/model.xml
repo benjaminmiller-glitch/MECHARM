@@ -1,1 +1,74 @@
+<mujoco model="mecharm_pi">
 
+  <compiler angle="radian" meshdir="assets/"/>
+
+  <default>
+    <joint damping="1" frictionloss="1"/>
+  </default>
+
+  <asset>
+    <mesh name="base"  file="base.obj"/>
+    <mesh name="link1" file="link1.obj"/>
+    <mesh name="link2" file="link2.obj"/>
+    <mesh name="link3" file="link3.obj"/>
+    <mesh name="link4" file="link4.obj"/>
+    <mesh name="link5" file="link5.obj"/>
+    <mesh name="link6" file="link6.obj"/>
+  </asset>
+
+  <worldbody>
+    <body name="base_link" pos="0 0 0">
+      <geom type="mesh" mesh="base" contype="0" conaffinity="0"/>
+
+      <body name="link01" pos="0 0 0.136">
+        <joint name="joint1" type="hinge" axis="0 0 1" range="-2.62 2.62"/>
+        <geom type="mesh" mesh="link1" contype="0" conaffinity="0"/>
+
+        <body name="link02" pos="0 0 0.1">
+          <joint name="joint2" type="hinge" axis="0 1 0" range="-2.62 2.62"/>
+          <geom type="mesh" mesh="link2" contype="0" conaffinity="0"/>
+
+          <body name="link03" pos="0 0 0.1">
+            <joint name="joint3" type="hinge" axis="0 1 0" range="-2.62 2.62"/>
+            <geom type="mesh" mesh="link3" contype="0" conaffinity="0"/>
+
+            <body name="link04" pos="0 0 0.107">
+              <joint name="joint4" type="hinge" axis="0 0 1" range="-2.62 2.62"/>
+              <geom type="mesh" mesh="link4" contype="0" conaffinity="0"/>
+
+              <body name="link05" pos="0 0 0.107">
+                <joint name="joint5" type="hinge" axis="0 1 0" range="-2.62 2.62"/>
+                <geom type="mesh" mesh="link5" contype="0" conaffinity="0"/>
+
+                <body name="link06" pos="0 0 0.065">
+                  <joint name="joint6" type="hinge" axis="0 0 1" range="-2.62 2.62"/>
+                  <geom type="mesh" mesh="link6" contype="0" conaffinity="0"/>
+
+                  <!-- Punto de interés para Mink -->
+                  <site name="attachment_site" pos="0 0 0.05" size="0.01" rgba="1 0 0 1"/>
+
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="motor1" joint="joint1" ctrlrange="-2.62 2.62" gear="1"/>
+    <motor name="motor2" joint="joint2" ctrlrange="-2.62 2.62" gear="1"/>
+    <motor name="motor3" joint="joint3" ctrlrange="-2.62 2.62" gear="1"/>
+    <motor name="motor4" joint="joint4" ctrlrange="-2.62 2.62" gear="1"/>
+    <motor name="motor5" joint="joint5" ctrlrange="-2.62 2.62" gear="1"/>
+    <motor name="motor6" joint="joint6" ctrlrange="-2.62 2.62" gear="1"/>
+  </actuator>
+
+  <keyframe>
+    <key name="home" qpos="0 0 0 0 0 0"/>
+    <key name="pick" qpos="0 0 0 0 0 0"/>
+    <key name="place" qpos="0 0 0 0 0 0"/>
+  </keyframe>
+
+</mujoco>
