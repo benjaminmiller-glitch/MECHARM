@@ -1,51 +1,81 @@
 <mujoco model="mecharm_pi">
-
-  <compiler angle="radian" meshdir="assets/"/>
+  <compiler angle="radian" autolimits="true" meshdir="assets"/>
+  <option timestep="0.01" gravity="0 0 0" integrator="Euler"/>
 
   <default>
-    <joint damping="1" frictionloss="1"/>
+    <joint limited="true" damping="1.0" armature="0.01"/>
+    <geom contype="0" conaffinity="0"/>
+    <site size="0.008"/>
   </default>
 
   <asset>
-    <mesh name="base"  file="base.obj"  scale="0.001 0.001 0.001"/>
-    <mesh name="link1" file="link1.obj" scale="0.001 0.001 0.001"/>
-    <mesh name="link2" file="link2.obj" scale="0.001 0.001 0.001"/>
-    <mesh name="link3" file="link3.obj" scale="0.001 0.001 0.001"/>
-    <mesh name="link4" file="link4.obj" scale="0.001 0.001 0.001"/>
-    <mesh name="link5" file="link5.obj" scale="0.001 0.001 0.001"/>
-    <mesh name="link6" file="link6.obj" scale="0.001 0.001 0.001"/>
+    <material name="mat_dark"    rgba="0.15 0.15 0.15 1"/>
+    <material name="mat_light"   rgba="0.85 0.85 0.85 1"/>
+    <material name="mat_orange"  rgba="0.85 0.35 0.10 1"/>
+    <material name="mat_blue"    rgba="0.20 0.50 0.80 1"/>
+    <material name="mat_obj"     rgba="0.10 0.75 0.25 1"/>
+    <mesh name="base_mesh"  file="base.obj"  scale="0.001 0.001 0.001"/>
+    <mesh name="link1_mesh" file="link1.obj" scale="0.001 0.001 0.001"/>
+    <mesh name="link2_mesh" file="link2.obj" scale="0.001 0.001 0.001"/>
+    <mesh name="link3_mesh" file="link3.obj" scale="0.001 0.001 0.001"/>
+    <mesh name="link4_mesh" file="link4.obj" scale="0.001 0.001 0.001"/>
+    <mesh name="link5_mesh" file="link5.obj" scale="0.001 0.001 0.001"/>
+    <mesh name="link6_mesh" file="link6.obj" scale="0.001 0.001 0.001"/>
   </asset>
 
   <worldbody>
-    <body name="base_link" pos="0 0 0">
-      <geom type="mesh" mesh="base" contype="0" conaffinity="0" rgba="0.7 0.7 0.7 1"/>
+    <!-- Base fija -->
+    <body name="base" pos="0 0 0">
+      <geom type="mesh" mesh="base_mesh" material="mat_light" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+      <geom type="cylinder" size="0.055 0.018" pos="0 0 0.018" material="mat_dark" rgba="0.2 0.2 0.2 0.3"/>
 
-      <body name="link01" pos="0 0 0.136">
-        <joint name="joint1" type="hinge" axis="0 0 1" range="-2.62 2.62"/>
-        <geom type="mesh" mesh="link1" contype="0" conaffinity="0" rgba="0.8 0.3 0.1 1"/>
+      <!-- Joint 1: rotacion base (eje Z) -->
+      <body name="link1" pos="0 0 {d1:.4f}">
+        <joint name="joint1" type="hinge" axis="0 0 1" range="-3.1416 3.1416"/>
+        <geom type="mesh" mesh="link1_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+        <geom type="capsule" fromto="0 0 0 0 0 0.05" size="0.022" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
+        <site name="joint1_site" pos="0 0 0" rgba="1 0 0 1"/>
 
-        <body name="link02" pos="0 0 0.1">
-          <joint name="joint2" type="hinge" axis="0 1 0" range="-2.62 2.62"/>
-          <geom type="mesh" mesh="link2" contype="0" conaffinity="0" rgba="0.2 0.5 0.8 1"/>
+        <!-- Joint 2: hombro (eje Y) -->
+        <body name="link2" pos="0 0 {a2:.4f}">
+          <joint name="joint2" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
+          <geom type="mesh" mesh="link2_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+          <geom type="capsule" fromto="0 0 0 {a2:.4f} 0 0" size="0.016" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
+          <site name="joint2_site" pos="0 0 0" rgba="0 1 0 1"/>
 
-          <body name="link03" pos="0 0 0.1">
-            <joint name="joint3" type="hinge" axis="0 1 0" range="-2.62 2.62"/>
-            <geom type="mesh" mesh="link3" contype="0" conaffinity="0" rgba="0.8 0.3 0.1 1"/>
+          <!-- Joint 3: codo (eje Y) -->
+          <body name="link3" pos="{a2:.4f} 0 0">
+            <joint name="joint3" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
+            <geom type="mesh" mesh="link3_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+            <geom type="capsule" fromto="0 0 0 {d4:.4f} 0 0" size="0.014" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
+            <site name="joint3_site" pos="0 0 0" rgba="0 0 1 1"/>
 
-            <body name="link04" pos="0 0 0.107">
-              <joint name="joint4" type="hinge" axis="0 0 1" range="-2.62 2.62"/>
-              <geom type="mesh" mesh="link4" contype="0" conaffinity="0" rgba="0.2 0.5 0.8 1"/>
+            <!-- Joint 4: antebrazo (eje Z) -->
+            <body name="link4" pos="{d4:.4f} 0 0">
+              <joint name="joint4" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
+              <geom type="mesh" mesh="link4_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+              <geom type="sphere" size="0.020" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
 
-              <body name="link05" pos="0 0 0.107">
-                <joint name="joint5" type="hinge" axis="0 1 0" range="-2.62 2.62"/>
-                <geom type="mesh" mesh="link5" contype="0" conaffinity="0" rgba="0.8 0.3 0.1 1"/>
+              <!-- Joint 5: muneca (eje Y) -->
+              <body name="link5" pos="0.018 0 0">
+                <joint name="joint5" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
+                <geom type="mesh" mesh="link5_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+                <geom type="sphere" size="0.018" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
 
-                <body name="link06" pos="0 0 0.065">
-                  <joint name="joint6" type="hinge" axis="0 0 1" range="-2.62 2.62"/>
-                  <geom type="mesh" mesh="link6" contype="0" conaffinity="0" rgba="0.2 0.5 0.8 1"/>
+                <!-- Joint 6: rotacion gripper (eje Z) -->
+                <body name="link6" pos="0.018 0 0">
+                  <joint name="joint6" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
+                  <geom type="mesh" mesh="link6_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+                  <geom type="capsule" fromto="0 0 0 0.029 0 0" size="0.011" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
 
-                  <site name="attachment_site" pos="0 0 0.05" size="0.01" rgba="1 0 0 1"/>
-
+                  <!-- Gripper y punto de interes -->
+                  <body name="gripper" pos="0.047 0 0">
+                    <geom name="gripper_palm" type="box" size="0.012 0.020 0.012" material="mat_dark"/>
+                    <geom name="finger_left"  type="box" size="0.018 0.004 0.006" pos="0.018  0.016 0" material="mat_dark"/>
+                    <geom name="finger_right" type="box" size="0.018 0.004 0.006" pos="0.018 -0.016 0" material="mat_dark"/>
+                    <!-- Punto de interes del gripper para Mink -->
+                    <site name="attachment_site" pos="0.018 0 0" rgba="1 0 0 1"/>
+                  </body>
                 </body>
               </body>
             </body>
@@ -53,21 +83,31 @@
         </body>
       </body>
     </body>
+
+    <!-- Objeto a tomar (mocap) -->
+    <body name="object" mocap="true" pos="0.16 0.10 0.025">
+      <geom name="object_geom" type="sphere" size="0.018" material="mat_obj"/>
+    </body>
+    <!-- Target visual para Mink -->
+    <body name="target" mocap="true" pos="0.18 0.00 0.12">
+      <geom name="target_geom" type="sphere" size="0.010" rgba="1 0.5 0 0.45"/>
+    </body>
+    <!-- Zona de destino -->
+    <body name="place_zone" pos="0.08 -0.16 0.003">
+      <geom name="place_zone_geom" type="cylinder" size="0.035 0.003" rgba="1.0 0.2 0.2 0.35"/>
+    </body>
   </worldbody>
 
   <actuator>
-    <motor name="motor1" joint="joint1" ctrlrange="-2.62 2.62" gear="1"/>
-    <motor name="motor2" joint="joint2" ctrlrange="-2.62 2.62" gear="1"/>
-    <motor name="motor3" joint="joint3" ctrlrange="-2.62 2.62" gear="1"/>
-    <motor name="motor4" joint="joint4" ctrlrange="-2.62 2.62" gear="1"/>
-    <motor name="motor5" joint="joint5" ctrlrange="-2.62 2.62" gear="1"/>
-    <motor name="motor6" joint="joint6" ctrlrange="-2.62 2.62" gear="1"/>
+    <motor name="act1" joint="joint1" gear="1" ctrlrange="-3.1416  3.1416"/>
+    <motor name="act2" joint="joint2" gear="1" ctrlrange="-2.3562  2.3562"/>
+    <motor name="act3" joint="joint3" gear="1" ctrlrange="-2.3562  2.3562"/>
+    <motor name="act4" joint="joint4" gear="1" ctrlrange="-3.1416  3.1416"/>
+    <motor name="act5" joint="joint5" gear="1" ctrlrange="-2.3562  2.3562"/>
+    <motor name="act6" joint="joint6" gear="1" ctrlrange="-3.1416  3.1416"/>
   </actuator>
 
   <keyframe>
-    <key name="home" qpos="0 0 0 0 0 0"/>
-    <key name="pick" qpos="0 0 0 0 0 0"/>
-    <key name="place" qpos="0 0 0 0 0 0"/>
+    <key name="home" qpos="0 -0.75 1.05 0 -0.30 0"/>
   </keyframe>
-
 </mujoco>
