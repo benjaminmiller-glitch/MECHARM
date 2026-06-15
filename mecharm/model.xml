@@ -24,56 +24,44 @@
   </asset>
 
   <worldbody>
-    <!-- Base fija -->
     <body name="base" pos="0 0 0">
-      <geom type="mesh" mesh="base_mesh" material="mat_light" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+      <geom type="mesh" mesh="base_mesh" material="mat_light" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="-0.00364 -0.02754 0"/>
       <geom type="cylinder" size="0.055 0.018" pos="0 0 0.018" material="mat_dark" rgba="0.2 0.2 0.2 0.3"/>
 
-      <!-- Joint 1: rotacion base (eje Z) -->
       <body name="link1" pos="0 0 0.1360">
         <joint name="joint1" type="hinge" axis="0 0 1" range="-3.1416 3.1416"/>
-        <geom type="mesh" mesh="link1_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+        <geom type="mesh" mesh="link1_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0 -0.09430 0"/>
         <geom type="capsule" fromto="0 0 0 0 0 0.05" size="0.022" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
-        <site name="joint1_site" pos="0 0 0" rgba="1 0 0 1"/>
 
-        <!-- Joint 2: hombro (eje Y) -->
         <body name="link2" pos="0 0 0.1000">
           <joint name="joint2" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
-          <geom type="mesh" mesh="link2_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+          <geom type="mesh" mesh="link2_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="-0.00857 -0.16468 0"/>
           <geom type="capsule" fromto="0 0 0 0.1000 0 0" size="0.016" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
-          <site name="joint2_site" pos="0 0 0" rgba="0 1 0 1"/>
 
-          <!-- Joint 3: codo (eje Y) -->
           <body name="link3" pos="0.1000 0 0">
             <joint name="joint3" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
-            <geom type="mesh" mesh="link3_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+            <geom type="mesh" mesh="link3_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.00878 -0.21967 0"/>
             <geom type="capsule" fromto="0 0 0 0.1070 0 0" size="0.014" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
-            <site name="joint3_site" pos="0 0 0" rgba="0 0 1 1"/>
 
-            <!-- Joint 4: antebrazo (eje X) -->
             <body name="link4" pos="0.1070 0 0">
               <joint name="joint4" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
-              <geom type="mesh" mesh="link4_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+              <geom type="mesh" mesh="link4_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.14492 -0.12101 -0.16540"/>
               <geom type="sphere" size="0.020" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
 
-              <!-- Joint 5: muneca (eje Y) -->
               <body name="link5" pos="0.018 0 0">
                 <joint name="joint5" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
-                <geom type="mesh" mesh="link5_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+                <geom type="mesh" mesh="link5_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.11177 -0.23294 0"/>
                 <geom type="sphere" size="0.018" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
 
-                <!-- Joint 6: rotacion gripper (eje X) -->
                 <body name="link6" pos="0.018 0 0">
                   <joint name="joint6" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
-                  <geom type="mesh" mesh="link6_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0"/>
+                  <geom type="mesh" mesh="link6_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.16457 -0.23350 0"/>
                   <geom type="capsule" fromto="0 0 0 0.029 0 0" size="0.011" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
 
-                  <!-- Gripper y punto de interes -->
                   <body name="gripper" pos="0.047 0 0">
-                    <geom name="gripper_palm" type="box" size="0.012 0.020 0.012" material="mat_dark"/>
-                    <geom name="finger_left"  type="box" size="0.018 0.004 0.006" pos="0.018  0.016 0" material="mat_dark"/>
-                    <geom name="finger_right" type="box" size="0.018 0.004 0.006" pos="0.018 -0.016 0" material="mat_dark"/>
-                    <!-- Punto de interes del gripper para Mink -->
+                    <geom name="gripper_palm"  type="box" size="0.012 0.020 0.012" material="mat_dark"/>
+                    <geom name="finger_left"   type="box" size="0.018 0.004 0.006" pos="0.018  0.016 0" material="mat_dark"/>
+                    <geom name="finger_right"  type="box" size="0.018 0.004 0.006" pos="0.018 -0.016 0" material="mat_dark"/>
                     <site name="attachment_site" pos="0.018 0 0" rgba="1 0 0 1"/>
                   </body>
                 </body>
@@ -84,15 +72,12 @@
       </body>
     </body>
 
-    <!-- Objeto a tomar (mocap) -->
     <body name="object" mocap="true" pos="0.16 0.10 0.025">
       <geom name="object_geom" type="sphere" size="0.018" material="mat_obj"/>
     </body>
-    <!-- Target visual para Mink -->
     <body name="target" mocap="true" pos="0.18 0.00 0.12">
       <geom name="target_geom" type="sphere" size="0.010" rgba="1 0.5 0 0.45"/>
     </body>
-    <!-- Zona de destino -->
     <body name="place_zone" pos="0.08 -0.16 0.003">
       <geom name="place_zone_geom" type="cylinder" size="0.035 0.003" rgba="1.0 0.2 0.2 0.35"/>
     </body>
