@@ -1,5 +1,4 @@
 <mujoco model="mecharm_scene">
-  <compiler angle="radian"/>
   <include file="model.xml"/>
   <visual>
     <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0.1 0.1 0.1"/>
