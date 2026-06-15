@@ -25,37 +25,37 @@
 
   <worldbody>
     <body name="base" pos="0 0 0">
-      <geom type="mesh" mesh="base_mesh" material="mat_light" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="-0.00364 -0.02754 0"/>
+      <geom type="mesh" mesh="base_mesh" material="mat_light" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="-0.00364 0.00001 -0.02754"/>
       <geom type="cylinder" size="0.055 0.018" pos="0 0 0.018" material="mat_dark" rgba="0.2 0.2 0.2 0.3"/>
 
       <body name="link1" pos="0 0 0.1360">
         <joint name="joint1" type="hinge" axis="0 0 1" range="-3.1416 3.1416"/>
-        <geom type="mesh" mesh="link1_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0 -0.09430 0"/>
+        <geom type="mesh" mesh="link1_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.00000 0.00064 -0.09430"/>
         <geom type="capsule" fromto="0 0 0 0 0 0.05" size="0.022" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
 
         <body name="link2" pos="0 0 0.1000">
           <joint name="joint2" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
-          <geom type="mesh" mesh="link2_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="-0.00857 -0.16468 0"/>
+          <geom type="mesh" mesh="link2_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="-0.00857 0.00122 -0.16468"/>
           <geom type="capsule" fromto="0 0 0 0.1000 0 0" size="0.016" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
 
           <body name="link3" pos="0.1000 0 0">
             <joint name="joint3" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
-            <geom type="mesh" mesh="link3_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.00878 -0.21967 0"/>
+            <geom type="mesh" mesh="link3_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.00878 -0.00040 -0.21967"/>
             <geom type="capsule" fromto="0 0 0 0.1070 0 0" size="0.014" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
 
             <body name="link4" pos="0.1070 0 0">
               <joint name="joint4" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
-              <geom type="mesh" mesh="link4_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.14492 -0.12101 -0.16540"/>
+              <geom type="mesh" mesh="link4_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.14492 0.16540 -0.12101"/>
               <geom type="sphere" size="0.020" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
 
               <body name="link5" pos="0.018 0 0">
                 <joint name="joint5" type="hinge" axis="0 1 0" range="-2.3562 2.3562"/>
-                <geom type="mesh" mesh="link5_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.11177 -0.23294 0"/>
+                <geom type="mesh" mesh="link5_mesh" material="mat_orange" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.11177 0.00007 -0.23294"/>
                 <geom type="sphere" size="0.018" material="mat_orange" rgba="0.85 0.35 0.10 0.3"/>
 
                 <body name="link6" pos="0.018 0 0">
                   <joint name="joint6" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
-                  <geom type="mesh" mesh="link6_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.16457 -0.23350 0"/>
+                  <geom type="mesh" mesh="link6_mesh" material="mat_blue" contype="0" conaffinity="0" quat="0.707 0.707 0 0" pos="0.16457 -0.00000 -0.23350"/>
                   <geom type="capsule" fromto="0 0 0 0.029 0 0" size="0.011" material="mat_blue" rgba="0.20 0.50 0.80 0.3"/>
 
                   <body name="gripper" pos="0.047 0 0">
